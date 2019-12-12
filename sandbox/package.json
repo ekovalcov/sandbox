@@ -1,0 +1,20 @@
+{
+  "name": "sandbox",
+  "version": "1.0.0",
+  "description": "playbox",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "author": "e.kovalcov",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^2.4.0",
+    "chai": "^4.2.0",
+    "prettier": "1.18.2",
+    "xo": "^0.25.3"
+  },
+  "xo": {
+    "space": true
+  }
+}
