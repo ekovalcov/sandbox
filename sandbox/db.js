@@ -4,30 +4,43 @@ const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology:
 var debug = require('debug')('db')
 var dbName = 'jokes'
 
-const findItem = (telegramMessage, bot) => {
-  console.log(bot)
+
+const findItem = searchKey => {
+  let finalResult;
   client.connect(err => {
     err? debug('error connection to db\n', err):
     client.db(dbName).collection(dbName).find({}).toArray().then(result => {
-      bot.sendMessage(telegramMessage.chat.id, result[0].joke)
+      debug('====== find in db', result)
+      finalResult = result[0].joke;
     })
     client.close()
+    return finalResult;
   })
 }
 
-const insertItem = telegramMessage => {
-  debug('establishing connect to', dbName)
-  client.connect(err => {
-    err? debug('error connection to db\n', err):
-    client.db(dbName).collection(dbName).insert(telegramMessage.text)
-    bot.sendMessage(telegramMessage.chat.id, 'Your joke has been added!')
-    client.close()
-  })
-}
+// const findItem = (telegramMessage, ombject) => {
+//   client.connect(err => {
+//     err? debug('error connection to db\n', err):
+//     client.db(dbName).collection(dbName).find(object).toArray().then(result => {
+//       bot.sendMessage(telegramMessage.chat.id, result[0].joke)
+//     })
+//     client.close()
+//   })
+// }
+
+// const insertItem = telegramMessage => {
+//   debug('establishing connect to', dbName)
+//   client.connect(err => {
+//     err? debug('error connection to db\n', err):
+//     client.db(dbName).collection(dbName).insert(telegramMessage.text)
+//     bot.sendMessage(telegramMessage.chat.id, 'Your joke has been added!')
+//     client.close()
+//   })
+// }
 
 module.exports = {
   findItem,
-  insertItem
+  // insertItem
 }
 
 

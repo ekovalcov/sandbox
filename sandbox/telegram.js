@@ -7,8 +7,9 @@ var debug = require('debug')
 const {findItem} = require('./db')
 
 bot.onText(/\/joke (.+)/,  (msg, match) => {
-    debug('got message', msg)
-    findItem(msg, bot)
+    const joke = findItem(msg)
+    console.log(joke)
+    bot.sendMessage(telegramMessage.chat.id, joke)
 });
 
 // bot.onText(/\/add (.+)/, (msg, match) => {
