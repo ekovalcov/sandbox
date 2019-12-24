@@ -7,15 +7,16 @@ var dbName = 'jokes'
 
 const findItem = searchKey => {
   let finalResult;
+
   client.connect(err => {
     err? debug('error connection to db\n', err):
     client.db(dbName).collection(dbName).find({}).toArray().then(result => {
-      debug('====== find in db', result)
       finalResult = result[0].joke;
     })
     client.close()
-    return finalResult;
   })
+  
+  return finalResult;
 }
 
 // const findItem = (telegramMessage, ombject) => {
