@@ -6,10 +6,8 @@ const bot = new TelegramBot(token, { polling: true });
 var debug = require('debug')
 const {findItem} = require('./db')
 
-bot.onText(/\/joke (.+)/,  (msg, match) => {
-    const joke = findItem(msg)
-    console.log(joke)
-    bot.sendMessage(telegramMessage.chat.id, joke)
+bot.onText(/\/j (.+)/,  (msg) => {
+    findItem(msg, bot)
 });
 
 // bot.onText(/\/add (.+)/, (msg, match) => {
