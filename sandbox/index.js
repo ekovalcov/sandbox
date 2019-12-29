@@ -20,8 +20,9 @@ client.connect(err => {
         bot = new TelegramBot(token, { polling: true });
         bot.onText(/\/j (.+)/, (msg) => {
             dbCollection.find(createObjectForIdSearch(msg)).toArray().then(result => {
-                console.log(result)
-              bot.sendMessage(msg.chat.id, JSON.stringify(result[0].joke))
+                result.forEach(elem => {
+                    bot.sendMessage(msg.chat.id, elem.joke)
+                })
             })
         });
     })
