@@ -25,13 +25,6 @@ client.connect(err => {
             })
         });
     })
-    debug('dbCollection \n', dbCollection)
-    // .find()
-    // .toArray(createObjectForIdSearch(msg))
-    // .then(result => {
-    //   debug('RESULT\n', result)
-    //   bot.sendMessage(msg.chat.id, JSON.stringify(result))
-    // })
 })
 
 
