@@ -6,17 +6,24 @@ const url = 'mongodb+srv://ekovalcov:KfHan%3D4V%21%26dLDvEw%29sWb%7D@cluster0-o2
 const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 var dbName = 'jokes'
 
-const findItem = (msg, bot) => {
+const findItem = async (msg, bot) => {
   debug('INCOMING MESSAGE', msg)
   client.connect(err => {
     err? debug('error connection to db\n', err):
-    client.db(dbName).collection(dbName).find().toArray(createObjectForIdSearch(msg)).then(result => {
-      debug('RESULT\n', result)
-      bot.sendMessage(msg.chat.id, JSON.stringify(result))
-    })
+    client
+      .db(dbName)
+      .collection(dbName)
+      .find()
+      .toArray(createObjectForIdSearch(msg))
+      .then(result => {
+        debug('RESULT\n', result)
+        bot.sendMessage(msg.chat.id, JSON.stringify(result))
+      })
     client.close()
   })
 }
+
+console.log()
 
 // const insertItem = telegramMessage => {
 //   debug('establishing connect to', dbName)
