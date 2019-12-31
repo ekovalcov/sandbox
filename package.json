@@ -4,7 +4,8 @@
   "description": "playbox",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "index.js"
   },
   "author": "e.kovalcov",
   "license": "MIT",
