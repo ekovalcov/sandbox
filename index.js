@@ -25,7 +25,7 @@ app.listen(port, function () {
             bot.onText(/\/j (.+)/, (msg) => {
                 dbCollection.find(createObjectForIdSearch(msg)).toArray().then(result => {
                     result.forEach(elem => {
-                        bot.sendMessage(msg.chat.id, JSON.stringify(elem.joke));
+                        bot.sendMessage(msg.chat.id, elem.joke);
                     });  
                 });
             });
