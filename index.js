@@ -1,5 +1,6 @@
 'use strict'
 
+var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
 const TelegramBot = require('node-telegram-bot-api');
 var debug = require('debug');
@@ -15,18 +16,24 @@ var client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: t
 var dbCollection;
 var bot;
 
-client.connect(err => {
-    dbCollection = client.db(dbName).collection(dbName, () => {
-        bot = new TelegramBot(token, { polling: true });
-        bot.onText(/\/j (.+)/, (msg) => {
-            dbCollection.find(createObjectForIdSearch(msg)).toArray().then(result => {
-                result.forEach(elem => {
-                    bot.sendMessage(msg.chat.id, JSON.stringify(elem.joke));
-                });  
+var app = express();
+var port = process.env.PORT || 3002
+app.listen(port, function () {
+    client.connect(err => {
+        dbCollection = client.db(dbName).collection(dbName, () => {
+            bot = new TelegramBot(token, { polling: true });
+            bot.onText(/\/j (.+)/, (msg) => {
+                dbCollection.find(createObjectForIdSearch(msg)).toArray().then(result => {
+                    result.forEach(elem => {
+                        bot.sendMessage(msg.chat.id, JSON.stringify(elem.joke));
+                    });  
+                });
             });
         });
     });
-});
+  });
+
+
 
 
 
