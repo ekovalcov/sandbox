@@ -24,7 +24,7 @@ describe('helpers.js', function() {
 
   describe('createObjectForIdSearch', function() {
     it('формируется корректный JSON для поиска шутки по id', async function() {
-      await assert.deepStrictEqual(createObjectForIdSearch(testMsg), {user: "999999"});
+      await assert.deepStrictEqual(createObjectForIdSearch(testMsg), {author: "999999"});
     });
   });
 });
