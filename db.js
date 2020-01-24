@@ -23,7 +23,16 @@ const findItem = async (msg, bot) => {
   })
 }
 
-console.log()
+const getCollection = async () => {
+    var connect = await new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true }).connect().then(res => {
+        return res
+    });
+    const db = connect.db(dbName)
+    const collection = db.collection(dbName)
+    const result = await collection.find({author: "Женя"})
+    return await result.toArray();
+}
+
 
 // const insertItem = telegramMessage => {
 //   debug('establishing connect to', dbName)
@@ -37,6 +46,7 @@ console.log()
 
 module.exports = {
   findItem,
+  getCollection
   // insertItem
 }
 

@@ -3,7 +3,6 @@
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
 const TelegramBot = require('node-telegram-bot-api');
-var debug = require('debug');
 const { createObjectForIdSearch } = require('./helpers');
 
 const url = 'mongodb+srv://ekovalcov:KfHan%3D4V%21%26dLDvEw%29sWb%7D@cluster0-o2rqp.mongodb.net/test?retryWrites=true&w=majority';
@@ -13,8 +12,7 @@ var dbName = 'jokes';
 
 var client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
-var dbCollection;
-var bot;
+var dbCollection, bot;
 
 var app = express();
 var port = process.env.PORT || 3002
