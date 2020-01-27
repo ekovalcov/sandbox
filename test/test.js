@@ -1,6 +1,6 @@
 var _ = require('lodash');
 const assert = require('assert');
-const {findItem} = require('../db')
+const {findItem, getJokesByAuthor} = require('../db')
 const {getMsgText} = require('../helpers')
 const {createObjectForIdSearch} = require('../helpers')
 
@@ -28,3 +28,12 @@ describe('helpers.js', function() {
     });
   });
 });
+
+describe('db.js', () => {
+  describe('getJokesByAuthor', () => {
+    it('в продовой базе ищется тестовая шутка по имени Автора', async () => {
+      const searchResult = await getJokesByAuthor('tester')
+      await assert.equal(searchResult[0].joke, 'test the search method')
+    })
+  })
+})

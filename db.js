@@ -27,12 +27,25 @@ const getCollection = async () => {
     var connect = await new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true }).connect().then(res => {
         return res
     });
-    const db = connect.db(dbName)
-    const collection = db.collection(dbName)
-    const result = await collection.find({author: "Женя"})
-    return await result.toArray();
+    return connect.db(dbName).collection()
+    return connect.db(dbName).collection(dbName)
 }
 
+const getJokesByAuthor = async name => {
+  const collection = await getCollection()
+  debug(collection)
+  const res = await collection.find({author: name}).toArray()
+  debug(res)
+  return res
+  
+}
+
+// getJokesByAuthor("Женя")
+
+(async () => {
+  const re = await getJokesByAuthor("tester")
+  console.log(re)
+})()
 
 // const insertItem = telegramMessage => {
 //   debug('establishing connect to', dbName)
@@ -46,7 +59,7 @@ const getCollection = async () => {
 
 module.exports = {
   findItem,
-  getCollection
+  getJokesByAuthor
   // insertItem
 }
 
