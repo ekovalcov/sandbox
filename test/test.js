@@ -33,10 +33,10 @@ describe('helpers.js', function() {
 
 describe('db.js', () => {
   describe('getJokesByAuthor', function() {
-    this.timeout(5000); 
     it('в продовой базе ищется тестовая шутка по имени Автора', async () => {
       const searchResult = await getJokesByAuthor("tester", connect)
-      await assert.equal(searchResult[0].joke, 'test the search method')
+      assert.equal(searchResult.length, 1)
+      assert.equal(searchResult[0].joke, 'test the search method')
     })
   })
 })

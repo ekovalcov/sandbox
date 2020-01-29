@@ -8,10 +8,11 @@ const url = 'mongodb+srv://ekovalcov:KfHan%3D4V%21%26dLDvEw%29sWb%7D@cluster0-o2
 const dbName = 'jokes'; 
  
 const getConnection = async () => await MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true }).connect()
+const extractCollection = connection => connection.db(dbName).collection(dbName);
 
 const getJokesByAuthor = async (name, connection) => {
   printConnection(connection)
-  const collection = connection.db(dbName).collection(dbName);
+  const collection = extractCollection(connection)
   printCollection(collection)
   const res = await collection.find({author: name}).toArray()
   printSearchResult(res)
