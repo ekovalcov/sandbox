@@ -1,45 +1,24 @@
-'use strict'
+// Подключаем библиотеку для работы с Telegram API в переменную
+var TelegramBot = require('node-telegram-bot-api');
 
-var express = require('express');
-var MongoClient = require('mongodb').MongoClient;
-const TelegramBot = require('node-telegram-bot-api');
-const { createObjectForIdSearch } = require('./helpers');
-const { getJokesByAuthor } = require('./db')
+// Устанавливаем токен, который выдавал нам бот
+var token = '980381562:AAHJ2Xra1x7JuKCM2y1z__S8KJ3m3e_R8P0';
+// Включить опрос сервера. Бот должен обращаться к серверу Telegram, чтобы получать актуальную информацию
+// Подробнее: https://core.telegram.org/bots/api#getupdates
+var bot = new TelegramBot(token, { polling: true });
 
-const url = 'mongodb+srv://ekovalcov:KfHan%3D4V%21%26dLDvEw%29sWb%7D@cluster0-o2rqp.mongodb.net/test?retryWrites=true&w=majority';
-const token = '980381562:AAH2Fz8UjC5w-eut-FoGaM8bywUIBLF1Pmo';
-var dbName = 'jokes';
+// Написать мне ... (/echo Hello World! - пришлет сообщение с этим приветствием, то есть "Hello World!")
+bot.onText(/\/echo (.+)/, function (msg, match) {
+    console.log(msg)
+    var fromId = msg.from.id; // Получаем ID отправителя
+    var resp = match[1]; // Получаем текст после /echo
+    bot.sendMessage(fromId, resp);
+});
 
-
-// var client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true }).connect();
-(async ()=> {
-    console.log(getJokesByAuthor("Женя"))
-})()
-
-
-
-
-// var dbCollection, bot;
-
-// var app = express();
-// var port = process.env.PORT || 3002
-// app.listen(port, function () {
-//     client.connect(err => {
-//         dbCollection = client.db(dbName).collection(dbName);
-    
-//     });
-// });
-
-// bot = new TelegramBot(token, { polling: true });
-
-// bot.onText(/\/j (.+)/, (msg) => {
-//     dbCollection.find(createObjectForIdSearch(msg)).toArray().then(result => {
-//         result.forEach(elem => {
-//             bot.sendMessage(msg.chat.id, elem.joke);
-//         });  
-//     });
-// });
-
-
-
-
+// Простая команда без параметров
+bot.on('message', function (msg) {
+    var chatId = msg.chat.id; // Берем ID чата (не отправителя)
+    // Фотография может быть: путь к файлу, поток (stream) или параметр file_id
+    var photo = 'cats.png'; // в папке с ботом должен быть файл "cats.png"
+    bot.sendPhoto(chatId, photo, { caption: 'Милые котята' });
+});
