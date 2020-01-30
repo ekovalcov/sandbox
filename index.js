@@ -2,30 +2,24 @@
 
 const TelegramBot = require('node-telegram-bot-api');
 const {getJokesByAuthor, getConnection} = require('./db')
-const printTelegram = require('debug')('telegram')
+const printTelegramMessage = require('debug')('telegram')
+const DEBUG = require('debug')('DEBUG')
 
 const token = '980381562:AAHJ2Xra1x7JuKCM2y1z__S8KJ3m3e_R8P0';
 
 const bot = new TelegramBot(token, { polling: true });
+var connect;
 
-// bot.on('message', (msg) => {
-//     const chatId = msg.chat.id;
-  
-//     // send a message to the chat acknowledging receipt of their message
-//     bot.sendMessage(chatId, 'Received your message');
-//   });
+(async () => {
+    connect = await getConnection()
+})()
 
-// var connect;
-// (async () => {
-//     connect = await getConnection()
-// })()
-
-
-
-bot.onText(/\/j (.+)/, (telegramMessage) => {
-    console.log(telegramMessage)
-    printTelegram(telegramMessage)
-    const jokes = getJokesByAuthor("tester", connect)
+bot.onText(/\/j (.+)/, async telegramMessage => {
+    printTelegramMessage(telegramMessage)
+    const jokes = await getJokesByAuthor(telegramMessage, connect)
+    if (jokes.length === 0) {
+        bot.sendMessage(telegramMessage.chat.id, 'Автор не умеет шутить (шуток не найдено)');
+    }
     jokes.forEach(elem => {
         bot.sendMessage(telegramMessage.chat.id, elem.joke);
     });  
