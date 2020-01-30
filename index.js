@@ -3,7 +3,8 @@
 const TelegramBot = require('node-telegram-bot-api');
 const {getJokesByAuthor, getConnection} = require('./db')
 const printTelegramMessage = require('debug')('telegram')
-const DEBUG = require('debug')('DEBUG')
+var express = require('express');
+
 
 const token = '980381562:AAHJ2Xra1x7JuKCM2y1z__S8KJ3m3e_R8P0';
 
@@ -11,6 +12,7 @@ const bot = new TelegramBot(token, { polling: true });
 var connect;
 
 var port = process.env.PORT || 3002
+var app = express();
 app.listen(port, function () { 
     
 (async () => {
