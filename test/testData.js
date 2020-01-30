@@ -16,7 +16,7 @@ const testMsg = {
     type: 'private'
   },
   date: 1577556884,
-  text: '/j 999999',
+  text: '/j tester',
   entities: [ { offset: 0, length: 2, type: 'bot_command' } ]
 };
 
