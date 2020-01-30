@@ -2,12 +2,13 @@
 
 const getMsgText = msg => msg.text.split(' ')[1]
 
-const createObjectForIdSearch = msg => {
-    return {author: getMsgText(msg)}
+const toSearchByAuthorObject = function(telegramMessage) {
+    const messageText = getMsgText(telegramMessage)
+    return {author: messageText}
 }
 
  module.exports = {
      getMsgText,
-     createObjectForIdSearch
+     toSearchByAuthorObject
  }
 

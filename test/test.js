@@ -1,8 +1,7 @@
 var _ = require('lodash');
 const assert = require('assert');
 const {getConnection, getJokesByAuthor} = require('../db')
-const {getMsgText} = require('../helpers')
-const {createObjectForIdSearch} = require('../helpers')
+const {getMsgText, toSearchByAuthorObject} = require('../helpers')
 const {testMsg} = require('./testData')
 
 var connect;
@@ -23,10 +22,9 @@ describe('helpers.js', function() {
     });
   });
 
-  describe('createObjectForIdSearch', function() {
-    
-    it('формируется корректный JSON для поиска шутки по id', async function() {
-      await assert.deepStrictEqual(createObjectForIdSearch(testMsg), {author: "999999"});
+  describe('toSearchByAuthorObject', function() {
+    it('формируется валидный объект для поиска по автору в базе', async function() {
+      await assert.equal(toSearchByAuthorObject(testMsg), 999999);
     });
   });
 });
@@ -35,8 +33,10 @@ describe('db.js', () => {
   describe('getJokesByAuthor', function() {
     it('в продовой базе ищется тестовая шутка по имени Автора', async () => {
       const searchResult = await getJokesByAuthor("tester", connect)
-      assert.equal(searchResult.length, 1)
       assert.equal(searchResult[0].joke, 'test the search method')
+    })
+    it('база содержит 1 результат поиска', () => {
+      assert.equal(searchResult.length, 1)
     })
   })
 })
