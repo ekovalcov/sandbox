@@ -15,6 +15,9 @@ var connect;
 
 var app = express();
 var port = process.env.PORT || 3002 
+
+app.get('/', (req, res) => res.send('Hello World!'))
+
 app.listen(port, function () { 
     
     (async () => {
@@ -22,10 +25,6 @@ app.listen(port, function () {
     })()
 
     bot.onText(/\/j (.+)/, async telegramMessage => {
-        //ping heroku to wake up server if it is sleeping
-        request('https://hidden-fjord-85890.herokuapp.com/', () => {
-            console.log(12312312312312312312312312312312312312131213121123123123123123123)
-        })
         printTelegramMessage(telegramMessage)
         const jokes = await getJokesByAuthor(telegramMessage, connect)
         if (jokes.length === 0) {
