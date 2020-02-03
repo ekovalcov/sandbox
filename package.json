@@ -12,6 +12,7 @@
   "devDependencies": {
     "ava": "^2.4.0",
     "chai": "^4.2.0",
+    "husky": "^4.2.1",
     "mocha": "^6.2.2"
   },
   "xo": {
