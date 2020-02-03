@@ -34,6 +34,11 @@ app.listen(port, function () {
             bot.sendMessage(telegramMessage.chat.id, elem.joke);
         });  
     });
+
+    bot.onText(/\/help (.+)/, async telegramMessage => {
+        printTelegramMessage(telegramMessage)
+        bot.sendMessage(telegramMessage.chat.id, 'Привет,\n чтобы найти все шутки конкретного человека, введи команду "/j %name%", например "/j Влад"');
+    });
 }); 
 
 
