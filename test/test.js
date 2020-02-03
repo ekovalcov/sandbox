@@ -1,10 +1,15 @@
 var _ = require('lodash');
 const assert = require('assert');
 const {getConnection, getJokesByAuthor} = require('../db')
-const {getMsgText, toSearchByAuthorObject} = require('../helpers')
-const {searchJokeMsg} = require('./testData')
+const {getMsgText, toSearchByAuthorObject, toJokeObject} = require('../helpers')
+const {searchJokeMsg, addJokeMsg} = require('./testData')
 
 const text = "tester"
+const joke = {
+  joke: 'testers gonna test',
+  rating: 1,
+  author: 262443789
+}
 
 
 var connect;
@@ -31,6 +36,11 @@ describe('helpers.js', function() {
     });
   });
 
+  describe('toJokeObject', function() {
+    it('DTO сообщения телеграмма к joke', async function() {
+      await assert.deepEqual(toJokeObject(addJokeMsg), joke)
+    });
+  });
 
 });
 

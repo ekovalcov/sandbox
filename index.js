@@ -1,7 +1,7 @@
 "use strict";
 
 const TelegramBot = require("node-telegram-bot-api");
-const { getJokesByAuthor, getConnection } = require("./db");
+const { getJokesByAuthor, getConnection, insertJoke } = require("./db");
 const printTelegramMessage = require("debug")("telegram");
 var express = require("express");
 
@@ -21,7 +21,6 @@ app.listen(port, function() {
   })();
 
   bot.onText(/\/j (.+)/, async telegramMessage => {
-    console.log(telegramMessage)
     printTelegramMessage(telegramMessage);
     const jokes = await getJokesByAuthor(telegramMessage, connect);
     if (jokes.length === 0) {
@@ -33,6 +32,15 @@ app.listen(port, function() {
     jokes.forEach(elem => {
       bot.sendMessage(telegramMessage.chat.id, elem.joke);
     });
+  });
+
+  bot.onText(/\/add (.+)/, async telegramMessage => {
+    printTelegramMessage(telegramMessage);
+    await insertJoke(telegramMessage, connect)
+    await bot.sendMessage(
+      telegramMessage.chat.id,
+      "Шутка добавлена!"
+    );  
   });
 
   bot.onText(/\/help/, async telegramMessage => {
