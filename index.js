@@ -44,7 +44,7 @@ app.listen(port, function() {
     printTelegramMessage(telegramMessage);
     bot.sendMessage(
       telegramMessage.chat.id,
-      "Привет, \nсписок доступных команд:\n/j - поиск всех шуток по имени автора: /j Влад"
+      "Привет, \nсписок доступных команд:\n/j - поиск всех шуток по имени автора: /j Влад\n/add - добавление шутки: /add твоя шутка"
     );
   });
 });
