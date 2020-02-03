@@ -7,7 +7,18 @@ const toSearchByAuthorObject = function(telegramMessage) {
   return { author: messageText };
 };
 
+// const toJokeObject = telegramMessage => {
+//   jokeText = getMsgText(telegramMessage);
+//   author = getAuthor
+//   const jokeObject = {
+//     joke: jokeText,
+//     rating: 1,
+
+//   }
+// }
+
 module.exports = {
   getMsgText,
-  toSearchByAuthorObject
+  toSearchByAuthorObject,
+  // toJokeObject
 };

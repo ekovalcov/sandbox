@@ -4,7 +4,6 @@ const TelegramBot = require("node-telegram-bot-api");
 const { getJokesByAuthor, getConnection } = require("./db");
 const printTelegramMessage = require("debug")("telegram");
 var express = require("express");
-var request = require("request");
 
 const token = "980381562:AAHJ2Xra1x7JuKCM2y1z__S8KJ3m3e_R8P0";
 
@@ -35,7 +34,7 @@ app.listen(port, function() {
     });
   });
 
-  bot.onText(/\/help (.+)/, async telegramMessage => {
+  bot.onText(/\/help/, async telegramMessage => {
     printTelegramMessage(telegramMessage);
     bot.sendMessage(
       telegramMessage.chat.id,

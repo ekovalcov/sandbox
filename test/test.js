@@ -2,9 +2,10 @@ var _ = require('lodash');
 const assert = require('assert');
 const {getConnection, getJokesByAuthor} = require('../db')
 const {getMsgText, toSearchByAuthorObject} = require('../helpers')
-const {testMsg} = require('./testData')
+const {searchJokeMsg} = require('./testData')
 
-const validTestMsg = "tester"
+const text = "tester"
+
 
 var connect;
 
@@ -20,21 +21,23 @@ after(async () => {
 describe('helpers.js', function() {
   describe('getMsgText', function() {
     it('из msg достается правильный текст команды', async function() {
-      await assert.equal(getMsgText(testMsg), validTestMsg);
-    });
+      await assert.equal(getMsgText(searchJokeMsg), text);
+    }); 
   });
 
   describe('toSearchByAuthorObject', function() {
     it('формируется валидный объект для поиска по автору в базе', async function() {
-      await assert.deepEqual(toSearchByAuthorObject(testMsg), {author: validTestMsg})
+      await assert.deepEqual(toSearchByAuthorObject(searchJokeMsg), {author: text})
     });
   });
+
+
 });
 
 describe('db.js', () => {
   describe('getJokesByAuthor', async function() {
     it('в продовой базе ищется тестовая шутка по имени Автора', async () => {
-      const searchResult = await getJokesByAuthor(testMsg, connect)
+      const searchResult = await getJokesByAuthor(searchJokeMsg, connect)
       await assert.equal(searchResult[0].joke, 'test the search method')
     })
     // it('база содержит 1 результат поиска', () => {
