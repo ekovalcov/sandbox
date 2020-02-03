@@ -12,9 +12,9 @@ const toJokeObject = telegramMessage => {
   return {
     joke: jokeText,
     rating: 1,
-    author: telegramMessage.from.id,
-  }
-}
+    author: telegramMessage.from.first_name
+  };
+};
 
 module.exports = {
   getMsgText,

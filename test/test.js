@@ -8,7 +8,7 @@ const text = "tester"
 const joke = {
   joke: 'testers gonna test',
   rating: 1,
-  author: 262443789
+  author: "Eugene"
 }
 
 

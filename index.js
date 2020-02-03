@@ -36,11 +36,8 @@ app.listen(port, function() {
 
   bot.onText(/\/add (.+)/, async telegramMessage => {
     printTelegramMessage(telegramMessage);
-    await insertJoke(telegramMessage, connect)
-    await bot.sendMessage(
-      telegramMessage.chat.id,
-      "Шутка добавлена!"
-    );  
+    await insertJoke(telegramMessage, connect);
+    await bot.sendMessage(telegramMessage.chat.id, "Шутка добавлена!");
   });
 
   bot.onText(/\/help/, async telegramMessage => {
