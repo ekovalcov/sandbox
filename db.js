@@ -2,7 +2,7 @@ const MongoClient = require("mongodb").MongoClient;
 const printCollection = require("debug")("collection"),
   printConnection = require("debug")("connection"),
   printSearchResult = require("debug")("search");
-const { toSearchByAuthorObject,  } = require("./helpers");
+const { toSearchByAuthorObject } = require("./helpers");
 
 const url =
   "mongodb+srv://ekovalcov:KfHan%3D4V%21%26dLDvEw%29sWb%7D@cluster0-o2rqp.mongodb.net";
@@ -31,7 +31,7 @@ const insertJoke = async (telegramMessage, connect) => {
   printConnection(connection);
   const collection = extractCollection(connect);
   printCollection(collection);
-  const joke = toJokeObject(telegramMessage)
+  const joke = toJokeObject(telegramMessage);
   return await collection.insert(joke);
 };
 

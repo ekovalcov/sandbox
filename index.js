@@ -21,6 +21,7 @@ app.listen(port, function() {
   })();
 
   bot.onText(/\/j (.+)/, async telegramMessage => {
+    console.log(telegramMessage)
     printTelegramMessage(telegramMessage);
     const jokes = await getJokesByAuthor(telegramMessage, connect);
     if (jokes.length === 0) {

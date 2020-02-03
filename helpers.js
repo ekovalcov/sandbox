@@ -19,6 +19,6 @@ const toSearchByAuthorObject = function(telegramMessage) {
 
 module.exports = {
   getMsgText,
-  toSearchByAuthorObject,
+  toSearchByAuthorObject
   // toJokeObject
 };
