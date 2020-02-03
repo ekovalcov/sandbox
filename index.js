@@ -37,7 +37,7 @@ app.listen(port, function () {
 
     bot.onText(/\/help (.+)/, async telegramMessage => {
         printTelegramMessage(telegramMessage)
-        bot.sendMessage(telegramMessage.chat.id, 'Привет,\n чтобы найти все шутки конкретного человека, введи команду "/j %name%", например "/j Влад"');
+        bot.sendMessage(telegramMessage.chat.id, 'Привет, \nсписок доступных команд:\n/j - поиск всех шуток по имени автора: /j Влад');
     });
 }); 
 
