@@ -26,7 +26,7 @@ app.listen(port, function() {
     if (jokes.length === 0) {
       bot.sendMessage(
         telegramMessage.chat.id,
-        "Автор не умеет шутить (шуток не найдено)"
+        "1Автор не умеет шутить (шуток не найдено)"
       );
     }
     jokes.forEach(elem => {
