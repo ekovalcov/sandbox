@@ -5,7 +5,7 @@ const { getJokesByAuthor, getConnection, insertJoke } = require("./db");
 const printTelegramMessage = require("debug")("telegram");
 var express = require("express");
 
-const token = "980381562:AAHJ2Xra1x7JuKCM2y1z__S8KJ3m3e_R8P0";
+const token = process.env.TELEGRAM_TOKEN;
 
 const bot = new TelegramBot(token, { polling: true });
 var connect;
@@ -26,7 +26,7 @@ app.listen(port, function() {
     if (jokes.length === 0) {
       bot.sendMessage(
         telegramMessage.chat.id,
-        "1Автор не умеет шутить (шуток не найдено)"
+        "Автор не умеет шутить (шуток не найдено)"
       );
     }
     jokes.forEach(elem => {
