@@ -5,7 +5,7 @@ const printCollection = require("debug")("collection"),
 const { toSearchByAuthorObject, toJokeObject } = require("./helpers");
 
 const url =
-  "mongodb+srv://ekovalcov:KfHan%3D4V%21%26dLDvEw%29sWb%7D@cluster0-o2rqp.mongodb.net";
+  `mongodb+srv://ekovalcov:${process.env.MONGO_CLUSTER_PASSWORD}cluster0-o2rqp.mongodb.net`;
 const dbName = "jokes";
 
 const getConnection = async () =>
