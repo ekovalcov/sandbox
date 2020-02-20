@@ -3,6 +3,7 @@
 const TelegramBot = require("node-telegram-bot-api");
 const { getJokesByAuthor, getConnection, insertJoke } = require("./db");
 const printTelegramMessage = require("debug")("telegram");
+const config = require("./config.json")
 var express = require("express");
 
 const token = process.env.TELEGRAM_TOKEN;
@@ -44,7 +45,7 @@ app.listen(port, function() {
     printTelegramMessage(telegramMessage);
     bot.sendMessage(
       telegramMessage.chat.id,
-      "Привет, \nсписок доступных команд:\n/j - поиск всех шуток по имени автора: /j VlaVla\n/add - добавление шутки: /add твоя шутка"
+      config.faqText
     );
   });
 });
