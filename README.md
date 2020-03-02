@@ -1,3 +1,3 @@
 # telegram bot "Joke of the day"
--- npm install. 
+-- npm install.   
 -- node index.js
